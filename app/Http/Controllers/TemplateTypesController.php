@@ -24,13 +24,13 @@ class TemplateTypesController extends Controller
     public function add(Request $request)
     {
         $validator = Validator::make($request->all(),
-                [
-                'customer_id' => 'required',
-                'support_category_id' => 'required',
-                'assigned_user_id' => 'required',
-                'support_status_id' => 'required',
-                'message' => 'required',
-        ]);
+                        [
+                            'customer_id' => 'required',
+                            'support_category_id' => 'required',
+                            'assigned_user_id' => 'required',
+                            'support_status_id' => 'required',
+                            'message' => 'required',
+                        ]);
 
         if (!$validator->fails()) {
         }
