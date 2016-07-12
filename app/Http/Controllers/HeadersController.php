@@ -35,6 +35,9 @@ class HeadersController extends Controller
 
     /* 
     *  Sample Input  
+    *  {
+    *    "phone" : "021116754329"
+    *  }
     *
     *  Sample Output 
     */
