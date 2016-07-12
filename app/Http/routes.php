@@ -32,5 +32,9 @@ Route::get('testAngularGrid', 'AngularController@testAngularGrid');
 Route::get('getTestJson', 'AngularController@getTestJson');
 
 
+//CRUD Headers
+
+
+
 
 

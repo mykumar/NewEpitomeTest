@@ -8,3 +8,42 @@ php artisan make:migration create_users_table --create=users
 To insert records into table
 php artisan make:migration add_votes_to_users_table --table=users
 
+
+php artisan make:controller HeadersController
+php artisan make:model Models\\Headers
+php artisan make:controller SectionsController
+
+php artisan make:model Models\\Sections
+
+php artisan make:controller ProjectsController
+
+php artisan make:model Models\\Projects
+
+php artisan make:controller EducationsController
+
+php artisan make:model Models\\Educations
+
+php artisan make:controller TechTypesController
+
+php artisan make:model Models\\TechTypes
+
+php artisan make:controller TechContentsController
+
+php artisan make:model Models\\TechContents
+
+php artisan make:controller TemplateTypesController
+
+php artisan make:model Models\\TemplateTypes
+
+php artisan make:controller TemplateContentsController
+
+php artisan make:model Models\\TemplateContents
+
+php artisan make:model Models\\EpitomeTypes
+
+php artisan make:model Models\\EpitomeContents
+
+php artisan make:controller EpitomeTypesController
+
+php artisan make:controller EpitomeContentsController
+
