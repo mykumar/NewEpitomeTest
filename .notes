@@ -1,0 +1,10 @@
+CREATE DATABASE `epitome_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+php artisan migrate:install
+
+To create the Table
+php artisan make:migration create_users_table --create=users
+
+To insert records into table
+php artisan make:migration add_votes_to_users_table --table=users
+

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBetaTable extends Migration
+class CreateEpitomeContentTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,8 @@ class CreateBetaTable extends Migration
      */
     public function up()
     {
-        Schema::create('beta', function (Blueprint $table) {
+        Schema::create('epitome_content', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('fathers_name');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ class CreateBetaTable extends Migration
      */
     public function down()
     {
-        Schema::drop('beta');
+        Schema::drop('epitome_content');
     }
 }
