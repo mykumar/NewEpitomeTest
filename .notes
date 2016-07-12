@@ -47,3 +47,16 @@ php artisan make:controller EpitomeTypesController
 
 php artisan make:controller EpitomeContentsController
 
+
+
+$validator = Validator::make($request->all(),
+                [
+                'customer_id' => 'required',
+                'support_category_id' => 'required',
+                'assigned_user_id' => 'required',
+                'support_status_id' => 'required',
+                'message' => 'required',
+        ]);
+
+        if (!$validator->fails()) {
+        }

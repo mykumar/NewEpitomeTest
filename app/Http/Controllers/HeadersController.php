@@ -6,36 +6,47 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Headers;
+use Log;
 
 class HeadersController extends Controller
 {
-    //
+    /* 
+    *  Sample Input  
+    *
+    *  Sample Output 
+    */
     public function index(Request $request)
     {
+        $headers = new Headers();
+        $data['data']  = $headers->getAll();
         return $this->respondWithSuccess($data);
-        return $this->respondWithError($data);
     }
-
+    /* 
+    *  Sample Input  
+    *
+    *  Sample Output 
+    */
     public function get(Request $request, $id)
     {
+        $headers = new Headers();
+        $data['data']  = $headers->get($id);
         return $this->respondWithSuccess($data);
-        return $this->respondWithError($data);
     }
 
+    /* 
+    *  Sample Input  
+    *
+    *  Sample Output 
+    */
     public function add(Request $request)
     {
-        $validator = Validator::make($request->all(),
-                [
-                'customer_id' => 'required',
-                'support_category_id' => 'required',
-                'assigned_user_id' => 'required',
-                'support_status_id' => 'required',
-                'message' => 'required',
-        ]);
-
-        if (!$validator->fails()) {
-        }
-        $data['data'] = array('message' => $validator->errors()->all());
+        $obj = (object) $request->json()->all();
+        $headers = new Headers();
+        if($headers->add($obj) ) {
+            $data['data'] = array('message' => "Successfully Inserted Record");    
+            return $this->respondWithSuccess($data);
+        } 
+        $data['data'] = array('message' => "Headers Inseration failed");
         return $this->respondWithError($data);
     }
 
