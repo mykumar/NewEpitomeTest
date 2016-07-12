@@ -14,6 +14,8 @@ class CreateHeadersTable extends Migration
     {
         Schema::create('headers', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('tag_name');
+            $table->string('value');
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class CreateEpitomeTypesTable extends Migration
     {
         Schema::create('epitome_types', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->timestamps();
         });
     }
