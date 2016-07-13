@@ -3,11 +3,11 @@ app.controller('TemplateManagerCtrl', ['$scope', '$filter', '$http', 'editableOp
     $controller('EpitomeTechtypesCtrl', {$scope: $scope}); //This works
 
     $scope.getTemplateManager = function () {
-        return "partials/templates/template-manager.html";
+        return "app/partials/templates/template-manager.html";
     };  
 
     $scope.getTemplateGenerators = function () {
-        return "partials/templates/template-generators.html";
+        return "app/partials/templates/template-generators.html";
     };  
     $scope.randomName = "THIS IS THE RANDOM NAME FOR TESTING";
 

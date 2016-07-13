@@ -10,6 +10,7 @@
             <div class="content-body">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
+                        <b> Select The Template </b>
                         <ui-select ng-model="techTypesObject.selected" on-select="onSelected(techTypesObject.selected)" theme="bootstrap" ng-disabled="disabled" style="width: 200px;" title="Choose a Tech TYpe">
                                     <ui-select-match placeholder="Select or search a Tech Type in the list..."> {{$select.selected.name}}</ui-select-match>
                                     <ui-select-choices repeat="techTypesObject in techTypes | filter: $select.search">
