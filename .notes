@@ -48,6 +48,12 @@ php artisan make:controller EpitomeTypesController
 php artisan make:controller EpitomeContentsController
 
 
+//Follow these Steps
+php artisan migrate
+php artisan migrate:rollback
+php artisan db:seed
+
+
 
 $validator = Validator::make($request->all(),
                 [
@@ -60,3 +66,16 @@ $validator = Validator::make($request->all(),
 
         if (!$validator->fails()) {
         }
+
+
+
+        EpitomeTest git:(master) ✗ php artisan migrate:rollback
+PHP Fatal error:  Class 'CreateAppliedTechTable' not found in /home/skumar/EpitomeTest/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php on line 335
+
+                                                           
+  [Symfony\Component\Debug\Exception\FatalErrorException]  
+  Class 'CreateAppliedTechTable' not found                 
+                                                           
+
+➜  EpitomeTest git:(master) ✗ composer dump-autoload
+Generating autoload files

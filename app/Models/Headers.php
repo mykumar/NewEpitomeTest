@@ -9,22 +9,29 @@ class Headers extends Model
 {
     protected $table = 'headers';
     public $timestamps = true;
+    protected $fillable = ['tag_name', 'value'];
 
-    public function getAll() {
+    public static function getAll() {
     	return self::all();
     }
 
-    public function get($id) {
+    public static function get($id) {
     	return self::find($id);
     }
 
-    public function add($object) {
-    	foreach ($object as $key => $value) {
-    		$headers = new Headers;
-	        $headers->tag_name = $key;
-	        $headers->value = $value;
-	        $headers->save();
-    	}		
-    	return true;
+    public static function add($record) {
+        return self::create($record);
+    }
+
+    public static function edit($id, $record) {
+        $row = self::find($id);
+        $row->tag_name = $record['tag_name'];
+        $row->value = $record['value'];
+        return $row->save();
+    }
+
+    public static function del($id) {
+        $row = self::find($id);
+        return $row->delete();
     }
 }
