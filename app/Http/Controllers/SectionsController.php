@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests;
 use App\Models\Sections;
+use Log;
 
 class SectionsController extends Controller
 {
@@ -49,8 +50,8 @@ class SectionsController extends Controller
             ]
         );
         if (!$validator->fails()) {
-            Sections::add($request->all());
-            $data['data'] = array('message' => 'Record Successfully Inserted');
+            $result = Sections::add($request->all());
+            $data['data'] = array('id' => $result['id'], 'message' => 'Record Successfully Inserted');
             return $this->respondWithSuccess($data);
         }    
         $data['data'] = array('message' => $validator->messages());
@@ -96,4 +97,12 @@ class SectionsController extends Controller
         $data['data'] = array('message' => 'Delete Operation on ID: ' . $id . ' Failed');    
         return $this->respondWithError($data);
     }    
+
+    public function deleteAll(Request $request)
+    {
+        $result = Sections::deleteAll();
+        Log::info(json_encode($result));
+        $data['data'] = array('message' => 'All Records Deleted Successfull');    
+        return $this->respondWithSuccess($data);
+    } 
 }

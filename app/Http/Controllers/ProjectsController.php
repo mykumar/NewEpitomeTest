@@ -54,8 +54,8 @@ class ProjectsController extends Controller
             ]
         );
         if (!$validator->fails()) {
-            Projects::add($request->all());
-            $data['data'] = array('message' => 'Record Successfully Inserted');
+            $result = Projects::add($request->all());
+            $data['data'] = array('id' => $result['id'], 'message' => 'Record Successfully Inserted');
             return $this->respondWithSuccess($data);
         }    
         $data['data'] = array('message' => $validator->messages());
@@ -89,4 +89,12 @@ class ProjectsController extends Controller
         $data['data'] = array('message' => 'Delete Operation on ID: ' . $id . ' Failed');    
         return $this->respondWithError($data);
     }    
+    public function deleteAll(Request $request)
+    {
+        Log::info("ProjectsController::deleteAll");
+        $result = Projects::deleteAll();
+        Log::info(json_encode($result));
+        $data['data'] = array('message' => 'All Records Deleted Successfull');    
+        return $this->respondWithSuccess($data);
+    }      
 }

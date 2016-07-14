@@ -43,6 +43,7 @@ class HeadersController extends Controller
     */
     public function add(Request $request)
     {
+        Log::info('HeadersController::add');
         $validator = Validator::make($request->all(),
             [
                 'tag_name' => 'required',
@@ -50,8 +51,8 @@ class HeadersController extends Controller
             ]
         );
         if (!$validator->fails()) {
-            Headers::add($request->all());
-            $data['data'] = array('message' => 'Record Successfully Inserted');
+            $result = Headers::add($request->all());
+            $data['data'] = array('id' => $result['id'], 'message' => 'Record Successfully Inserted');
             return $this->respondWithSuccess($data);
         }    
         $data['data'] = array('message' => $validator->messages());
@@ -96,5 +97,14 @@ class HeadersController extends Controller
         }
         $data['data'] = array('message' => 'Delete Operation on ID: ' . $id . ' Failed');    
     	return $this->respondWithError($data);
-    }       	
+    }  
+
+    public function deleteAll(Request $request)
+    {
+        Log::info("HeadersController::deleteAll");
+        $result = Headers::deleteAll();
+        Log::info(json_encode($result));
+        $data['data'] = array('message' => 'All Records Deleted Successfull');    
+        return $this->respondWithSuccess($data);
+    }      	
 }

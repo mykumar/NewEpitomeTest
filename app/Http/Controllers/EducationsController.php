@@ -52,8 +52,8 @@ class EducationsController extends Controller
             ]
         );
         if (!$validator->fails()) {
-            Educations::add($request->all());
-            $data['data'] = array('message' => 'Record Successfully Inserted');
+            $result = Educations::add($request->all());
+            $data['data'] = array('id' => $result['id'], 'message' => 'Record Successfully Inserted');
             return $this->respondWithSuccess($data);
         }    
         $data['data'] = array('message' => $validator->messages());
@@ -85,5 +85,13 @@ class EducationsController extends Controller
         }
         $data['data'] = array('message' => 'Delete Operation on ID: ' . $id . ' Failed');    
         return $this->respondWithError($data);
+    }   
+
+    public function deleteAll(Request $request)
+    {
+        $result = Educations::deleteAll();
+        Log::info(json_encode($result));
+        $data['data'] = array('message' => 'All Records Deleted Successfull');    
+        return $this->respondWithSuccess($data);
     }   
 }

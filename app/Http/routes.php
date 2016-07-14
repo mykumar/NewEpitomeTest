@@ -39,7 +39,7 @@ Route::get('educations/{id}.json', 'EducationsController@get');
 Route::post('educations.json', 'EducationsController@add');
 Route::put('educations/{id}.json', 'EducationsController@edit');
 Route::delete('educations/{id}.json', 'EducationsController@delete');
-
+Route::delete('educations.json', 'EducationsController@deleteAll');
 
 //Headers @@@@@
 Route::get('headers.json', 'HeadersController@index');
@@ -47,6 +47,7 @@ Route::get('headers/{id}.json', 'HeadersController@get');
 Route::post('headers.json', 'HeadersController@add');
 Route::put('headers/{id}.json', 'HeadersController@edit');
 Route::delete('headers/{id}.json', 'HeadersController@delete');
+Route::delete('headers.json', 'HeadersController@deleteAll');
 
 
 //Projects @@@@@
@@ -55,6 +56,7 @@ Route::get('projects/{id}.json', 'ProjectsController@get');
 Route::post('projects.json', 'ProjectsController@add');
 Route::put('projects/{id}.json', 'ProjectsController@edit');
 Route::delete('projects/{id}.json', 'ProjectsController@delete');
+Route::delete('projects.json', 'ProjectsController@deleteAll');
 
 //Sections @@@@@
 Route::get('sections.json', 'SectionsController@index');
@@ -62,6 +64,7 @@ Route::get('sections/{id}.json', 'SectionsController@get');
 Route::post('sections.json', 'SectionsController@add');
 Route::put('sections/{id}.json', 'SectionsController@edit');
 Route::delete('sections/{id}.json', 'SectionsController@delete');
+Route::delete('sections.json', 'SectionsController@deleteAll');
 
 //EpitomeTypes @@@@@
 Route::get('epitometypes.json', 'EpitomeTypesController@index');

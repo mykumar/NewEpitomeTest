@@ -36,4 +36,8 @@ class Projects extends Model
         $row = self::find($id);
         return $row->delete();
     }
+    
+    public static function deleteAll() {
+        return self::truncate();
+    }
 }
