@@ -79,5 +79,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'MYREACTJS_RESUME',
         ]);
 
+        //projects
+        DB::table('tech_content')->insert([
+            'tech_types_id' => 1,
+            'content' => 'tech content It is No. 1 company in NZ',
+            'section_id' => 12,
+            'project_id' => 123,
+        ]);
+
     }
 }

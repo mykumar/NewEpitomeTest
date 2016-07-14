@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests;
 use App\Models\Projects;
+use Log;
 
 class ProjectsController extends Controller
 {
@@ -31,15 +32,18 @@ class ProjectsController extends Controller
         return $this->respondWithSuccess($data);
     }
 
-    /* 
-    *  Sample Input  
-    *  {
-    *        "name" : "phone",
-    *        "desc" : "021443211"
-    *  }
-    *
-    *  Sample Output 
-    */
+    
+    // Sample Input  
+    // {
+
+    //     "name" : "Trademe",
+    //     "desc" : "It is the World wide trademe company",
+    //     "duration" : "Oct 2014 to Present",
+    //     "clients" : "Fishpond, rayme",
+    //     "outsourced" : "Orion Health"
+
+    // }
+    // Sample Output 
     public function add(Request $request)
     {
         $validator = Validator::make($request->all(),
@@ -58,16 +62,13 @@ class ProjectsController extends Controller
         return $this->respondWithError($data);
     }
 
-    /* 
-    *  $id Must be passed 
-    *  Sample Input  
-    *  {
-    *        "name" : "phone",
-    *        "desc" : "021443211"
-    *  }
-    *
-    *  Sample Output 
-    */
+    // {
+    //     "name" : "Chnaged Trademe",
+    //     "desc" : "Chnaged It is the World wide trademe company",
+    //     "duration" : "Chnaged  Oct 2014 to Present",
+    //     "clients" : "Chnaged  Fishpond, rayme",
+    //     "outsourced" : "Chnaged  Orion Health"
+    // }
     public function edit(Request $request, $id)
     {
         

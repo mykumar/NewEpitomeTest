@@ -33,7 +33,7 @@ Route::get('getTestJson', 'AngularController@getTestJson');
 
 
 //CRUD Headers (Read - GET, Create - POST, Update - PUT, Delete - DELETE)
-//Educations
+//Educations @@@@@
 Route::get('educations.json', 'EducationsController@index');
 Route::get('educations/{id}.json', 'EducationsController@get');
 Route::post('educations.json', 'EducationsController@add');
@@ -49,7 +49,7 @@ Route::put('headers/{id}.json', 'HeadersController@edit');
 Route::delete('headers/{id}.json', 'HeadersController@delete');
 
 
-//Projects
+//Projects @@@@@
 Route::get('projects.json', 'ProjectsController@index');
 Route::get('projects/{id}.json', 'ProjectsController@get');
 Route::post('projects.json', 'ProjectsController@add');
@@ -63,21 +63,21 @@ Route::post('sections.json', 'SectionsController@add');
 Route::put('sections/{id}.json', 'SectionsController@edit');
 Route::delete('sections/{id}.json', 'SectionsController@delete');
 
-//EpitomeTypes
+//EpitomeTypes @@@@@
 Route::get('epitometypes.json', 'EpitomeTypesController@index');
 Route::get('epitometypes/{id}.json', 'EpitomeTypesController@get');
 Route::post('epitometypes.json', 'EpitomeTypesController@add');
 Route::put('epitometypes/{id}.json', 'EpitomeTypesController@edit');
 Route::delete('epitometypes/{id}.json', 'EpitomeTypesController@delete');
 
-//TechTypes
+//TechTypes @@@@@
 Route::get('techtypes.json', 'TechTypesController@index');
 Route::get('techtypes/{id}.json', 'TechTypesController@get');
 Route::post('techtypes.json', 'TechTypesController@add');
 Route::put('techtypes/{id}.json', 'TechTypesController@edit');
 Route::delete('techtypes/{id}.json', 'TechTypesController@delete');
 
-//TemplateTypes
+//TemplateTypes @@@@@
 Route::get('templatetypes.json', 'TemplateTypesController@index');
 Route::get('templatetypes/{id}.json', 'TemplateTypesController@get');
 Route::post('templatetypes.json', 'TemplateTypesController@add');
@@ -85,5 +85,11 @@ Route::put('templatetypes/{id}.json', 'TemplateTypesController@edit');
 Route::delete('templatetypes/{id}.json', 'TemplateTypesController@delete');
 
 
+//TechContents 
+Route::get('techcontents.json', 'TechContentsController@index');
+Route::get('techcontents/{id}.json', 'TechContentsController@get');
+Route::post('techcontents.json', 'TechContentsController@add');
+Route::put('techcontents/{id}.json', 'TechContentsController@edit');
+Route::delete('techcontents/{id}.json', 'TechContentsController@delete');
 
 

@@ -9,4 +9,30 @@ class TechContents extends Model
     //
     protected $table = 'tech_content';
     public $timestamps = true;
+    protected $fillable = ['tech_types_id', 'content','section_id','project_id'];
+
+    public static function getAll() {
+    	return self::all();
+    }
+
+    public static function get($id) {
+    	return self::find($id);
+    }
+
+    public static function add($record) {
+        return self::create($record);
+    }
+
+    public static function edit($id, $record) {
+        $row = self::find($id);
+        foreach ($record as $key => $value) {
+            $row->$key = $value; 
+        }
+        return $row->save();
+    }
+
+    public static function del($id) {
+        $row = self::find($id);
+        return $row->delete();
+    }
 }

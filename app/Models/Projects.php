@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Log;
 
 class Projects extends Model
 {
@@ -25,8 +26,9 @@ class Projects extends Model
 
     public static function edit($id, $record) {
         $row = self::find($id);
-        $row->name = $record['name'];
-        $row->type = $record['type'];
+        foreach ($record as $key => $value) {
+            $row->$key = $value; 
+        }
         return $row->save();
     }
 

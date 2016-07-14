@@ -14,6 +14,10 @@ class CreateTechContentTable extends Migration
     {
         Schema::create('tech_content', function (Blueprint $table) {
             $table->increments('id');
+            $table->bigInteger('tech_types_id');
+            $table->string('content');
+            $table->bigInteger('section_id');
+            $table->bigInteger('project_id');
             $table->timestamps();
         });
     }
