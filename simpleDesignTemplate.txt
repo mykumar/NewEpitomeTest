@@ -1,3 +1,8 @@
+Tomorrow works
+-----------------------
+tech types: add/edit/delete the tech types
+Thier is some problem in the Orbit and FishPond tabs check it
+
 --extra bits
 newlyAdded -- if 1, we need to save to database
 deleteDirty -- if 1, we need to Deleet from database
@@ -48,6 +53,10 @@ CA_Content (we will name as "Content")
 
 server side 
 ---------------
+get method (headers, projects (Orbit, Fishpond), educatons, CA, CH):
+get all and make strure simliar to above on server side and send
+
+
 add method:
 
 if(should check first if thier is any record with values these: )
