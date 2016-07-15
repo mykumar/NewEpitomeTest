@@ -51,8 +51,8 @@ class TechContentsController extends Controller
             ]
         );
         if (!$validator->fails()) {
-            TechContents::add($request->all());
-            $data['data'] = array('message' => 'Record Successfully Inserted');
+            $result = TechContents::add($request->all());
+            $data['data'] = array('id' => $result['id'], 'message' => 'Record Successfully Inserted');
             return $this->respondWithSuccess($data);
         }    
         $data['data'] = array('message' => $validator->messages());
@@ -84,5 +84,12 @@ class TechContentsController extends Controller
         }
         $data['data'] = array('message' => 'Delete Operation on ID: ' . $id . ' Failed');    
         return $this->respondWithError($data);
+    }   
+
+    public function deleteAll(Request $request)
+    {
+        TechContents::deleteAll();
+        $data['data'] = array('message' => 'All Records Deleted Successfull');    
+        return $this->respondWithSuccess($data);
     }   
 }

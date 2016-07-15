@@ -1,3 +1,10 @@
+Know BUgs:
+-------------------------
+When the addition is failed for the headers, projects, edu, sections- we have to do some thing.
+
+
+
+
 CREATE DATABASE `epitome_db` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
 php artisan migrate:install

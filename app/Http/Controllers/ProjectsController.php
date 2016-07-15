@@ -51,6 +51,7 @@ class ProjectsController extends Controller
                 'name' => 'required',
                 'desc' => 'required',
                 'duration' => 'required',
+                'short_name' => 'required',
             ]
         );
         if (!$validator->fails()) {
@@ -91,9 +92,7 @@ class ProjectsController extends Controller
     }    
     public function deleteAll(Request $request)
     {
-        Log::info("ProjectsController::deleteAll");
-        $result = Projects::deleteAll();
-        Log::info(json_encode($result));
+        Projects::deleteAll();
         $data['data'] = array('message' => 'All Records Deleted Successfull');    
         return $this->respondWithSuccess($data);
     }      

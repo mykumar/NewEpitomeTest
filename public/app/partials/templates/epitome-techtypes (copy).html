@@ -1,0 +1,118 @@
+<section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Tech Types</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle material-icons">expand_more</i>
+                    <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
+                    <!-- <i class="box_close material-icons">close</i> -->
+                </div>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                        <!-- <span editable-text="head.id" e-name="id" e-form="techcontentform">
+                                {{ head.id || 'empty' }}
+                         </span> -->
+                         <p>Selected: {{techTypesObject.selected}}</p>  <br />
+                        <!-- <p> {{techTypesObjectSelected}} </p> <br /> -->
+                        <button type="button" class="btn btn-xs btn-info" >
+                          <i class="material-icons" style="font-size:14px;">delete</i>
+                        </button>
+                        <ui-select ng-model="techTypesObject.selected" on-select="onSelected(techTypesObject.selected)" theme="bootstrap" ng-disabled="disabled" style="width: 200px;" title="Choose a Tech TYpe">
+                            <ui-select-match placeholder="Select or search a Tech Type in the list..."> {{$select.selected.name}}</ui-select-match>
+                            <ui-select-choices repeat="techTypesObject in techTypes | filter: $select.search">
+                              <!-- <span ng-bind-html="techType.id | highlight: $select.search"></span> -->
+                              <small ng-bind-html="techTypesObject.name | highlight: $select.search"></small>
+                            </ui-select-choices>
+                        </ui-select>
+                        <br />
+                        <br />
+                </div>
+                <!-- <div class="row" ng-if="!isEmpty(techTypesObjectSelected)">
+                    <uib-tabset justified="true" class="tab-container primary">
+                    <uib-tab ng-repeat="section in sections">
+                            <uib-tab-heading>
+                                        <i class="fa fa-{{tab.icon}}"></i> {{section.smallname}}
+                            </uib-tab-heading>
+                             <ng-include src=getTemplateName(section.smallname) replace></ng-include>
+                    </uib-tab>
+                    <uib-tab ng-repeat="project in projects">
+                            <uib-tab-heading>
+                                      <i class="fa fa-{{tab.icon}}"></i> {{project.smallname}}
+                            </uib-tab-heading>
+                             <ng-include src=getTemplateName(project.smallname)  replace></ng-include>
+                    </uib-tab>            
+                    </uib-tabset>
+                </div> -->
+
+
+                <div class="row">
+                    <div ng-repeat="techContents in techContentData">
+                          <!-- <tr ng-repeat="techContents in techContentData"> -->
+                          TechContent sectionID ID :{{techContents.section_id}}<br />
+                          TechContent projectID ID :{{techContents.project_id}}<br />
+                          TechConetnt : {{techContents}} <br />
+                    </div>                        
+                    <uib-tabset justified="true" class="tab-container primary">
+                    <uib-tab ng-repeat="tab in tabsData">
+                            <uib-tab-heading>
+                                        {{tab.tabName}}
+                            </uib-tab-heading>
+                             
+                              <section class="box ">
+                                  <table class="table table-bordered table-hover bg-white-only">
+                                      <tr style="font-weight: bold">
+                                          <td style="width:90%">Content</td>
+                                          <td style="width:10%" align="center">
+                                              <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll('headers')">
+                                                <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                              </button>
+                                          </td>
+                                      </tr>
+                                      <tr ng-repeat="tabData in tab.data">
+                                      <!-- <tr ng-repeat="techContents in techContentData"> -->
+                                            Tab ID :{{tab.tabId}} <br />
+                                            sectionID ID :{{tab.sectionID}}<br />
+                                            projectID ID :{{tab.projectID}}<br />
+                                            Tab Data :{{tab.data}}<br />
+                                            Tab Data ID:{{tabData.id}}<br />
+                                            Tab Data Number:{{tabData.number}}<br />
+
+                                            TechContent sectionID ID :{{techContents.section_id}}<br />
+                                            TechContent projectID ID :{{techContents.project_id}}<br />
+                                            TechConetnt : {{techContents}} <br />
+                                         <!--  <div ng-if="((techContent.sectiond_id == tab.sectionID) || (techContent.project_id == tab.projectID))">  
+
+                                              <td class="v-middle">
+                                                    <span editable-text="techContent.content" e-name="content" e-form="techcontentform">
+                                                      {{ techContent.content || 'empty' }}
+                                                    </span>
+                                              </td>
+                                              <td style="white-space: nowrap">
+                                                  <form editable-form name="techcontentform" onbeforesave="save('headers', $data, $index)" ng-show="techcontentform.$visible" class="form-buttons form-inline" shown="insertedTechContentData == techContent">
+                                                      <button type="submit" ng-disabled="techcontentform.$waiting" class="btn btn-xs btn-info">
+                                                        <i class="material-icons" style="font-size:14px;">save</i>
+                                                      </button> 
+                                                      <button type="button" ng-disabled="techcontentform.$waiting" ng-click="techcontentform.$cancel()" class="btn btn-xs btn-default">
+                                                        <i class="material-icons" style="font-size:14px;">cancel</i>
+                                                      </button>
+                                                  </form>
+                                                  <div class="buttons" ng-show="!techcontentform.$visible">
+                                                      <button type="button" class="btn btn-xs btn-info"  ng-click="techcontentform.$show()">
+                                                        <i class="material-icons" style="font-size:14px;">visibility</i>
+                                                      </button>
+                                                      <button type="button" class="btn btn-xs btn-info"  ng-click="delete('headers', $index)">
+                                                        <i class="material-icons" style="font-size:14px;">delete</i>
+                                                      </button>
+                                                  </div>
+                                              </td>
+                                          </div>  -->   
+                                      </tr>
+                                  </table>
+                                  <button class="btn btn-primary btn-sm" ng-click="add('headers')">Add row</button>
+                              </section>
+                            <br /> 
+                    </uib-tab>
+                    </uib-tabset>
+                </div>
+            </div>
+        </section>

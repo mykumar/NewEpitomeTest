@@ -101,9 +101,7 @@ class HeadersController extends Controller
 
     public function deleteAll(Request $request)
     {
-        Log::info("HeadersController::deleteAll");
-        $result = Headers::deleteAll();
-        Log::info(json_encode($result));
+        Headers::deleteAll();
         $data['data'] = array('message' => 'All Records Deleted Successfull');    
         return $this->respondWithSuccess($data);
     }      	

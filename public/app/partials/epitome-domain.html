@@ -1,13 +1,13 @@
 <div class='content-wrapper' ng-init="app.settings.pagetitle = 'Technologies';">
     <div class="col-lg-12" ng-controller="EpitomeDomainCtrl">
+    <uib-tabset justified="true" class="tab-container primary">
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">border_top</i> Headers
+        </uib-tab-heading>
+    
         <!-- Headers -->
         <section class="box ">
-            <header class="panel_header">
-                <h2 class="title pull-left">Headers</h2>
-                <div class="actions panel_actions pull-right">
-                    <i class="box_toggle material-icons">expand_more</i>
-                </div>
-            </header>
             <div class="content-body">
                 <div class="row">
                     <table class="table table-bordered table-hover bg-white-only">
@@ -35,7 +35,7 @@
                             </td>
                             <td style="white-space: nowrap">
                                 <!-- form -->
-                                <form editable-form name="headerform" onbeforesave="save('headers', $data, head.id)" ng-show="headerform.$visible" class="form-buttons form-inline" shown="insertedHeadersData == head">
+                                <form editable-form name="headerform" onbeforesave="save('headers', $data, $index)" ng-show="headerform.$visible" class="form-buttons form-inline" shown="insertedHeadersData == head">
                                     <button type="submit" ng-disabled="headerform.$waiting" class="btn btn-xs btn-info">
                                       <i class="material-icons" style="font-size:14px;">save</i>
                                     </button> 
@@ -60,15 +60,15 @@
             </div>
         </section>
         <br />
-
-        <!-- Projects -->
+    </uib-tab>
+    
+    <!-- Projects -->
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">work</i> Projects
+        </uib-tab-heading>    
+        
         <section class="box ">
-            <header class="panel_header">
-                <h2 class="title pull-left">Projects</h2>
-                <div class="actions panel_actions pull-right">
-                    <i class="box_toggle material-icons">expand_more</i>
-                </div>
-            </header>
             <div class="content-body">
                 <div class="row">
                     <table class="table table-bordered table-hover bg-white-only">
@@ -77,7 +77,8 @@
                             <td style="width:20%">Description</td>
                             <td style="width:20%">Duration</td>
                             <td style="width:20%">Clients</td>
-                            <td style="width:20%">Out Sourced To</td>
+                            <td style="width:15%">Out Sourced To</td>
+                            <td style="width:5%">Short Name</td>
                             <td style="width:10%" align="center">
                                 <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll('projects')">
                                   <i class="material-icons" style="font-size:20px;">delete_forever</i>
@@ -115,9 +116,15 @@
                                   {{ project.outsourced || 'empty' }}
                                 </span>
                             </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="project.short_name" e-name="short_name" e-form="projectform" >
+                                  {{ project.short_name || 'empty' }}
+                                </span>
+                            </td>
                             <td style="white-space: nowrap">
                                 <!-- form -->
-                                <form editable-form name="projectform" onbeforesave="save('projects', $data, project.id)" ng-show="projectform.$visible" class="form-buttons form-inline" shown="insertedProjectsData == project">
+                                <form editable-form name="projectform" onbeforesave="save('projects', $data, $index)" ng-show="projectform.$visible" class="form-buttons form-inline" shown="insertedProjectsData == project">
                                     <button type="submit" ng-disabled="projectform.$waiting" class="btn btn-xs btn-info">
                                       <i class="material-icons" style="font-size:14px;">save</i>
                                     </button> 
@@ -142,21 +149,21 @@
             </div>
         </section>
         <br />
-     
-        <!-- Sections -->
+    </uib-tab>
+
+    <!-- Sections -->
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">library_add</i> Sections
+        </uib-tab-heading> 
         <section class="box ">
-            <header class="panel_header">
-                <h2 class="title pull-left">Sections</h2>
-                <div class="actions panel_actions pull-right">
-                    <i class="box_toggle material-icons">expand_more</i>
-                </div>
-            </header>
             <div class="content-body">
                 <div class="row">
                     <table class="table table-bordered table-hover bg-white-only">
                         <tr style="font-weight: bold">
                             <td style="width:10%">Name</td>
                             <td style="width:20%">Type</td>
+                            <td style="width:20%">Short Name</td>
                             <td style="width:10%" align="center">
                                 <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll('sections')">
                                   <i class="material-icons" style="font-size:20px;">delete_forever</i>
@@ -176,9 +183,15 @@
                                   {{ section.type || 'empty' }}
                                 </span>
                             </td>
+                             <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="section.short_name" e-name="short_name" e-form="sectionform" >
+                                  {{ section.short_name || 'empty' }}
+                                </span>
+                            </td>
                             <td style="white-space: nowrap">
                                 <!-- form -->
-                                <form editable-form name="sectionform" onbeforesave="save('sections', $data, section.id)" ng-show="sectionform.$visible" class="form-buttons form-inline" shown="insertedSectionsData == section">
+                                <form editable-form name="sectionform" onbeforesave="save('sections', $data, $index)" ng-show="sectionform.$visible" class="form-buttons form-inline" shown="insertedSectionsData == section">
                                     <button type="submit" ng-disabled="sectionform.$waiting" class="btn btn-xs btn-info">
                                       <i class="material-icons" style="font-size:14px;">save</i>
                                     </button> 
@@ -203,15 +216,15 @@
             </div>
         </section>
         <br />        
+    </uib-tab>
+    
 
-        <!-- educations -->
+    <!-- educations -->
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">developer_board</i> Educations
+        </uib-tab-heading>
         <section class="box ">
-            <header class="panel_header">
-                <h2 class="title pull-left">Educations</h2>
-                <div class="actions panel_actions pull-right">
-                    <i class="box_toggle material-icons">expand_more</i>
-                </div>
-            </header>
             <div class="content-body">
                 <div class="row">
                     <table class="table table-bordered table-hover bg-white-only">
@@ -253,7 +266,7 @@
                             </td>
                             <td style="white-space: nowrap">
                                 <!-- form -->
-                                <form editable-form name="educationform" onbeforesave="save('educations', $data, education.id)" ng-show="educationform.$visible" class="form-buttons form-inline" shown="insertedEducationsData == education">
+                                <form editable-form name="educationform" onbeforesave="save('educations', $data, $index)" ng-show="educationform.$visible" class="form-buttons form-inline" shown="insertedEducationsData == education">
                                     <button type="submit" ng-disabled="educationform.$waiting" class="btn btn-xs btn-info">
                                       <i class="material-icons" style="font-size:14px;">save</i>
                                     </button> 
@@ -278,8 +291,8 @@
             </div>
         </section>
         <br />                            
-        
-
+    </uib-tab>    
+    </uib-tabset>
      
                                             
 

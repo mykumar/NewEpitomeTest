@@ -47,6 +47,7 @@ class SectionsController extends Controller
             [
                 'name' => 'required',
                 'type' => 'required',
+                'short_name' => 'required',
             ]
         );
         if (!$validator->fails()) {
@@ -70,19 +71,9 @@ class SectionsController extends Controller
     */
     public function edit(Request $request, $id)
     {
-        $validator = Validator::make($request->all(),
-            [
-                'name' => 'required',
-                'type' => 'required',
-            ]
-        );
-        if (!$validator->fails()) {
-            Sections::edit($id, $request->all());
-            $data['data'] = array('message' => 'Record Successfully Edited');
-            return $this->respondWithSuccess($data);
-        }
-        $data['data'] = array('message' => $validator->messages());
-        return $this->respondWithError($data);
+        Sections::edit($id, $request->all());
+        $data['data'] = array('message' => 'Record Successfully Edited');
+        return $this->respondWithSuccess($data);
     } 
 
     /* 
@@ -100,8 +91,7 @@ class SectionsController extends Controller
 
     public function deleteAll(Request $request)
     {
-        $result = Sections::deleteAll();
-        Log::info(json_encode($result));
+        Sections::deleteAll();
         $data['data'] = array('message' => 'All Records Deleted Successfull');    
         return $this->respondWithSuccess($data);
     } 

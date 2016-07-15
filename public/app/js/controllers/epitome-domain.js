@@ -18,9 +18,16 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
     $scope.sectionsData = [];
     $scope.insertedSectionsData = {};
     
-    //Headers
-    $scope.save = function(type, data, id) {
-      var index = $scope.saveNewRow(type, data, id);
+    //Common Add, Save, Delete, Delete All Methods for All 
+    $scope.add = function(type) {
+      $scope.addNewRow(type);
+    };
+    $scope.save = function(type, data, index) {
+      console.dir("SAVE:::INDEX IS::" + index);
+      console.dir('-------------------------------WE FOR save----------------------');
+              console.dir($scope.projectsData);
+              console.dir($scope.projectsData[index]);
+      $scope.saveNewRow(type, data, index);
       if(index != -1) {
         var row = $scope.getCleanObjectForServer(type, index);
         //ADD Opeartion
@@ -34,9 +41,6 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
         }
       } 
     };
-    $scope.add = function(type) {
-      $scope.addNewRow(type);
-    };
     $scope.delete = function(type, index) {
       $scope.sendRequest(type, 'delete', null, index, 'DELETE');
       $scope.deleteRow(type, index);
@@ -45,62 +49,8 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
       $scope.sendRequest(type, 'delete', null, null, 'DELETEALL');
       $scope.setEmpty(type);
     };
-   
-    //Initialization 
-    $scope.init = function() {
-        $http.get($scope.headersURL).success(function(data) {
-            $scope.headersData = $scope.initData(data['data']);
-        });
-        $http.get($scope.projectsURL).success(function(data) {
-            $scope.projectsData = $scope.initData(data['data']);
-        });
-        $http.get($scope.educationsURL).success(function(data) {
-            $scope.educationsData = $scope.initData(data['data']);
-        });
-        $http.get($scope.sectionsURL).success(function(data) {
-            $scope.sectionsData = $scope.initData(data['data']);
-        });
-    };
-    $scope.init();
-
-    $scope.initData = function(data) {
-        for (var i = 0; i < data.length; i++){
-          data[i].dirty = 0; 
-          data[i].added = 0; //0 means Already thier, 1 means we added new record and need to send to server
-        }  
-        return data;
-    };  
 
     //Common operations
-    $scope.saveNewRow = function(type, data, id) {
-        console.dir('ID===' + id);
-        var index = $scope.getIndexById(type, id);
-        console.dir('INDEX===' + index);
-        switch(type.toLowerCase()) {
-          case 'headers':
-              $scope.headersData[index].tag_name = data['tag_name'];
-              $scope.headersData[index].value = data['value'];
-              return index;
-          case 'projects':
-              $scope.projectsData[index].name = data['name'];
-              $scope.projectsData[index].desc = data['desc'];
-              $scope.projectsData[index].duration = data['duration'];
-              $scope.projectsData[index].clients = data['clients'];
-              $scope.projectsData[index].outsourced = data['outsourced'];
-              return index;
-         case 'sections':
-              $scope.sectionsData[index].name = data['name'];
-              $scope.sectionsData[index].type = data['type'];
-              return index;
-         case 'educations':
-              $scope.educationsData[index].course_name = data['course_name'];
-              $scope.educationsData[index].uni_name = data['uni_name'];
-              $scope.educationsData[index].year = data['year'];
-              $scope.educationsData[index].percentage_marks = data['percentage_marks'];
-              return index;     
-        }  
-        return -1;
-    };  
     $scope.addNewRow = function(type) {
         switch(type.toLowerCase()) {
           case 'headers':
@@ -121,6 +71,7 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
                       duration: null,
                       clients: null,
                       outsourced: null,
+                      short_name: null,
                       dirty:0,
                       added:1 //0 means Already thier, 1 means we added new record and need to send to server
                   };
@@ -131,6 +82,7 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
                       id:$scope.sectionsData.length+1,
                       name: null,
                       type: null,
+                      short_name: null,
                       dirty:0,
                       added:1 //0 means Already thier, 1 means we added new record and need to send to server
                   };
@@ -151,6 +103,36 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
         }  
         return -1;
     };  
+    $scope.saveNewRow = function(type, data, index) {
+        console.dir('INDEX===' + index);
+        switch(type.toLowerCase()) {
+          case 'headers':
+              $scope.headersData[index].tag_name = data['tag_name'];
+              $scope.headersData[index].value = data['value'];
+              return index;
+          case 'projects':
+              $scope.projectsData[index].name = data['name'];
+              $scope.projectsData[index].desc = data['desc'];
+              $scope.projectsData[index].duration = data['duration'];
+              $scope.projectsData[index].clients = data['clients'];
+              $scope.projectsData[index].outsourced = data['outsourced'];
+              $scope.projectsData[index].short_name = data['short_name'];
+              return index;
+         case 'sections':
+              $scope.sectionsData[index].name = data['name'];
+              $scope.sectionsData[index].type = data['type'];
+              $scope.sectionsData[index].short_name = data['short_name'];
+              return index;
+         case 'educations':
+              $scope.educationsData[index].course_name = data['course_name'];
+              $scope.educationsData[index].uni_name = data['uni_name'];
+              $scope.educationsData[index].year = data['year'];
+              $scope.educationsData[index].percentage_marks = data['percentage_marks'];
+              return index;     
+        }  
+        return -1;
+    };  
+    
     $scope.deleteRow = function(type, index) {
         switch(type.toLowerCase()) {
           case 'headers':
@@ -337,6 +319,8 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
               $scope.updateID(type,index,parseInt(response['data']['data']['id']));
             }  
             if(operation=='EDIT') {
+              console.dir('-------------------------------WE GOR RESPOINSE FOR EDIT----------------------');
+              console.dir($scope.projectsData);
               $scope.updateDirty(type, index, 1); 
             }
         }, 
@@ -361,4 +345,30 @@ app.controller('EpitomeDomainCtrl', ['$scope', '$filter', '$http', 'editableOpti
               break;            
         }                
     };  
+
+
+    //Initialization 
+    $scope.init = function() {
+        $http.get($scope.headersURL).success(function(data) {
+            $scope.headersData = $scope.initData(data['data']);
+        });
+        $http.get($scope.projectsURL).success(function(data) {
+            $scope.projectsData = $scope.initData(data['data']);
+        });
+        $http.get($scope.educationsURL).success(function(data) {
+            $scope.educationsData = $scope.initData(data['data']);
+        });
+        $http.get($scope.sectionsURL).success(function(data) {
+            $scope.sectionsData = $scope.initData(data['data']);
+        });
+    };
+    $scope.init();
+
+    $scope.initData = function(data) {
+        for (var i = 0; i < data.length; i++){
+          data[i].dirty = 0; 
+          data[i].added = 0; //0 means Already thier, 1 means we added new record and need to send to server
+        }  
+        return data;
+    }; 
 }]);

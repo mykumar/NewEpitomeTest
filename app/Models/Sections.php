@@ -9,7 +9,7 @@ class Sections extends Model
     //
     protected $table = 'sections';
     public $timestamps = true;
-    protected $fillable = ['name', 'type'];
+    protected $fillable = ['name', 'type', 'short_name'];
 
     public static function getAll() {
     	return self::all();
@@ -25,8 +25,9 @@ class Sections extends Model
 
     public static function edit($id, $record) {
         $row = self::find($id);
-        $row->name = $record['name'];
-        $row->type = $record['type'];
+        foreach ($record as $key => $value) {
+            $row->$key = $value; 
+        }
         return $row->save();
     }
 

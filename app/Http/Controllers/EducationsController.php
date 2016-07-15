@@ -89,8 +89,7 @@ class EducationsController extends Controller
 
     public function deleteAll(Request $request)
     {
-        $result = Educations::deleteAll();
-        Log::info(json_encode($result));
+        Educations::deleteAll();
         $data['data'] = array('message' => 'All Records Deleted Successfull');    
         return $this->respondWithSuccess($data);
     }   

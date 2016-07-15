@@ -10,7 +10,7 @@ class Projects extends Model
     //
     protected $table = 'projects';
     public $timestamps = true;
-    protected $fillable = ['name', 'desc','duration','clients', 'outsourced',];
+    protected $fillable = ['name', 'desc','duration','clients', 'outsourced', 'short_name'];
 
     public static function getAll() {
     	return self::all();

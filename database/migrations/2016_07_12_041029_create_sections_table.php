@@ -16,6 +16,7 @@ class CreateSectionsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('type');
+            $table->string('short_name')->unique();
             $table->timestamps();
         });
     }

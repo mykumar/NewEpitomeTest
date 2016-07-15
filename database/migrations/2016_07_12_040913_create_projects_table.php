@@ -19,6 +19,7 @@ class CreateProjectsTable extends Migration
             $table->string('duration');
             $table->string('clients', 2500);
             $table->string('outsourced', 2500);
+            $table->string('short_name')->unique();
             $table->timestamps();
         });
     }
