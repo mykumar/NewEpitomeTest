@@ -91,8 +91,11 @@ Route::delete('templatetypes/{id}.json', 'TemplateTypesController@delete');
 //TechContents 
 Route::get('techcontents.json', 'TechContentsController@index');
 Route::get('techcontents/{id}.json', 'TechContentsController@get');
+Route::get('techcontents/techtype/{id}.json', 'TechContentsController@getAllOnTechTypeId');
+Route::get('techcontents/techtype/{techtypeId}/{sectionId}/{projectId}.json', 'TechContentsController@getAllOnIds');
 Route::post('techcontents.json', 'TechContentsController@add');
 Route::put('techcontents/{id}.json', 'TechContentsController@edit');
 Route::delete('techcontents/{id}.json', 'TechContentsController@delete');
+Route::delete('techcontents/techtype/{techtypeId}/{sectionId}.json', 'TechContentsController@deleteAll');
 
 

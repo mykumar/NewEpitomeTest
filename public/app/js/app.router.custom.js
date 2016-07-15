@@ -34,7 +34,7 @@ angular.module('app')
                     })
                     .state('app.epitome.domain', {
                         url: '/domain',
-                        templateUrl: 'app/partials/epitome-domain.html',
+                        templateUrl: 'app/partials/templates/epitome-domain.html',
                         controller: 'EpitomeDomainCtrl',
                         resolve: {
                             deps: ['$ocLazyLoad',
@@ -49,8 +49,9 @@ angular.module('app')
                         }
                     })
                     .state('app.epitome.techtypes', {
+                        cache: false,
                         url: '/techtypes',
-                        templateUrl: 'app/partials/epitome-techtypes.html',
+                        templateUrl: 'app/partials/templates/epitome-techtypes.html',
                         controller: 'EpitomeTechtypesCtrl',
                         resolve: {
                             deps: ['$ocLazyLoad',

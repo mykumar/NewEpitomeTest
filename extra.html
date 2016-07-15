@@ -1,0 +1,43 @@
+<uib-tab>
+  <uib-tab-heading>
+      <i class="material-icons" style="font-size:20px;">border_top</i> {{FishPond.name}}
+  </uib-tab-heading>
+  <table class="table table-bordered table-hover bg-white-only">
+    <tr style="font-weight: bold">
+        <td style="width:40%">Content</td>
+        <td style="width:10%" align="center">
+            <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(FishPond.name)">
+              <i class="material-icons" style="font-size:20px;">delete_forever</i>
+            </button>
+        </td>
+    </tr>
+    <tr ng-repeat="fish in FishPondData">
+        <td class="v-middle">
+            <!-- editable status (select-local) -->
+            <span editable-text="fish.content" e-name="content" e-form="FishPondform" >
+              {{ fish.content || 'empty' }}
+            </span>
+        </td>
+        <td style="white-space: nowrap">
+            <!-- form -->
+            <form editable-form name="FishPondform" onbeforesave="save(FishPond.name, $data, $index)" ng-show="FishPondform.$visible" class="form-buttons form-inline" shown="insertedFishpondData == fish">
+                <button type="submit" ng-disabled="FishPondform.$waiting" class="btn btn-xs btn-info">
+                  <i class="material-icons" style="font-size:14px;">save</i>
+                </button> 
+                <button type="button" ng-disabled="FishPondform.$waiting" ng-click="FishPondform.$cancel()" class="btn btn-xs btn-default">
+                  <i class="material-icons" style="font-size:14px;">cancel</i>
+                </button>
+            </form>
+            <div class="buttons" ng-show="!FishPondform.$visible">
+                <button type="button" class="btn btn-xs btn-info"  ng-click="FishPondform.$show()">
+                  <i class="material-icons" style="font-size:14px;">visibility</i>
+                </button>
+                <button type="button" class="btn btn-xs btn-info"  ng-click="delete(FishPond.name, $index)">
+                  <i class="material-icons" style="font-size:14px;">delete</i>
+                </button>
+            </div>
+        </td>
+    </tr>
+  </table>
+  <button class="btn btn-primary btn-sm" ng-click="add(FishPond.name)">Add row</button>
+</uib-tab>

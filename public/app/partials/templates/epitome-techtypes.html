@@ -1,51 +1,225 @@
-<section class="box ">
-            <header class="panel_header">
-                <h2 class="title pull-left">Tech Types</h2>
-                <div class="actions panel_actions pull-right">
-                    <i class="box_toggle material-icons">expand_more</i>
-                    <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
-                    <!-- <i class="box_close material-icons">close</i> -->
-                </div>
-            </header>
-            <div class="content-body">
-                <div class="row">
-                        <!-- <span editable-text="head.id" e-name="id" e-form="headerform">
-                                {{ head.id || 'empty' }}
-                         </span> -->
-                         <p>Selected: {{techTypesObject.selected}}</p>  <br />
-                        <!-- <p> {{techTypesObjectSelected}} </p> <br /> -->
-                        <button type="button" class="btn btn-xs btn-info" >
-                          <i class="material-icons" style="font-size:14px;">delete</i>
-                        </button>
-                        <ui-select ng-model="techTypesObject.selected" on-select="onSelected(techTypesObject.selected)" theme="bootstrap" ng-disabled="disabled" style="width: 200px;" title="Choose a Tech TYpe">
-                            <ui-select-match placeholder="Select or search a Tech Type in the list..."> {{$select.selected.name}}</ui-select-match>
-                            <ui-select-choices repeat="techTypesObject in techTypes | filter: $select.search">
-                              <!-- <span ng-bind-html="techType.id | highlight: $select.search"></span> -->
-                              <small ng-bind-html="techTypesObject.name | highlight: $select.search"></small>
-                            </ui-select-choices>
-                        </ui-select>
-                        <br />
-                        <br />
-                </div>
-                <div class="row" ng-if="!isEmpty(techTypesObjectSelected)">
-                    <uib-tabset justified="true" class="tab-container primary">
-                    <uib-tab ng-repeat="section in sections">
-                            <uib-tab-heading>
-                                        <!-- <i class="fa fa-{{tab.icon}}"></i> --> {{section.smallname}}
-                            </uib-tab-heading>
-                             <!-- <div ng-include="'template1.html'" include-replace></div> -->
-                             <ng-include src=getTemplateName(section.smallname) replace></ng-include>
-                             <!-- <div ng-include="'partials/templates/CA.html'"></div> -->
-                    </uib-tab>
-                    <uib-tab ng-repeat="project in projects">
-                            <uib-tab-heading>
-                                        <!-- <i class="fa fa-{{tab.icon}}"></i> --> {{project.smallname}}
-                            </uib-tab-heading>
-                             <!-- <div ng-include="'template1.html'" include-replace></div> -->
-                             <ng-include src=getTemplateName(project.smallname)  replace></ng-include>
-                             <!-- <div ng-include="'partials/templates/CA.html'"></div> -->
-                    </uib-tab>            
-                    </uib-tabset>
-                </div>
-            </div>
-        </section>
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'Tech Types';">
+  <div class="col-lg-12" ng-controller="EpitomeTechtypesCtrl">
+    <section class="box ">
+      <header class="panel_header">
+          <h2 class="title pull-left">Tech Types</h2>
+          <div class="actions panel_actions pull-right">
+              <i class="box_toggle material-icons">expand_more</i>
+              <!-- <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i> -->
+              <!-- <i class="box_close material-icons">close</i> -->
+          </div>
+      </header>
+      <div class="content-body">
+          <div class="row" ng-if="techTypes.length != 0">
+                <!-- Tech Types selected : {{techTypesObject.selected}} -->
+                Tech Type Name: <input type="text" ng-model="selectedTechTypeName">
+                <button type="button" class="btn btn-xs btn-info" ng-click=addTechType()>
+                  <i class="material-icons" style="font-size:14px;">note_add</i>
+                </button>
+                <button type="button" class="btn btn-xs btn-info" ng-click=saveTechType()>
+                  <i class="material-icons" style="font-size:14px;">save</i>
+                </button>
+                <button type="button" class="btn btn-xs btn-info" ng-click=deleteTechType() >
+                  <i class="material-icons" style="font-size:14px;">delete</i>
+                </button>
+                <br>  
+                <br>  
+                <ui-select ng-model="techTypesObject.selected" on-select="onSelected(techTypesObject.selected)" theme="bootstrap" ng-disabled="disabled" style="width: 200px;" title="Choose a Tech Type">
+                    <ui-select-match placeholder="Select or search a Tech Type in the list..."> {{$select.selected.name}}</ui-select-match>
+                    <ui-select-choices data-id="$index" repeat="techTypesObject in techTypes | filter: $select.search" >
+                      <!-- <span ng-bind-html="techType.id | highlight: $select.search"></span> -->
+                      <small ng-bind-html="techTypesObject.name | highlight: $select.search"></small>
+                    </ui-select-choices>
+                </ui-select>
+                <br />
+                <br />
+          </div>
+          <div class="row" ng-if="!isEmpty(techTypesObjectSelected)">
+              <uib-tabset justified="true" class="tab-container primary">
+                  <!-- Carrer HighLights-->
+                  <uib-tab>
+                    <uib-tab-heading>
+                        <i class="material-icons" style="font-size:20px;">border_top</i> {{CH.name}}
+                    </uib-tab-heading>
+                    <table class="table table-bordered table-hover bg-white-only">
+                      <tr style="font-weight: bold">
+                          <td style="width:40%">Content</td>
+                          <td style="width:10%" align="center">
+                              <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(CH.name)">
+                                <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                              </button>
+                          </td>
+                      </tr>
+                      <tr ng-repeat="ch in CHData">
+                          <td class="v-middle">
+                              <!-- editable status (select-local) -->
+                              <span editable-text="ch.content" e-name="content" e-form="CHform" >
+                                {{ ch.content || 'empty' }}
+                              </span>
+                          </td>
+                          <td style="white-space: nowrap">
+                              <!-- form -->
+                              <form editable-form name="CHform" onbeforesave="save(CH.name, $data, $index)" ng-show="CHform.$visible" class="form-buttons form-inline" shown="insertedCHData == ch">
+                                  <button type="submit" ng-disabled="CHform.$waiting" class="btn btn-xs btn-info">
+                                    <i class="material-icons" style="font-size:14px;">save</i>
+                                  </button> 
+                                  <button type="button" ng-disabled="CHform.$waiting" ng-click="CHform.$cancel()" class="btn btn-xs btn-default">
+                                    <i class="material-icons" style="font-size:14px;">cancel</i>
+                                  </button>
+                              </form>
+                              <div class="buttons" ng-show="!CHform.$visible">
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="CHform.$show()">
+                                    <i class="material-icons" style="font-size:14px;">visibility</i>
+                                  </button>
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="delete(CH.name, $index)">
+                                    <i class="material-icons" style="font-size:14px;">delete</i>
+                                  </button>
+                              </div>
+                          </td>
+                      </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add(CH.name)">Add row</button>
+                  </uib-tab>
+
+                  <!-- Carrer Achivements -->
+                  <uib-tab>
+                    <uib-tab-heading>
+                        <i class="material-icons" style="font-size:20px;">border_top</i> {{CA.name}}
+                    </uib-tab-heading>
+                    <table class="table table-bordered table-hover bg-white-only">
+                      <tr style="font-weight: bold">
+                          <td style="width:40%">Content</td>
+                          <td style="width:10%" align="center">
+                              <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(CA.name)">
+                                <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                              </button>
+                          </td>
+                      </tr>
+                      <tr ng-repeat="ca in CAData">
+                          <td class="v-middle">
+                              <!-- editable status (select-local) -->
+                              <span editable-text="ca.content" e-name="content" e-form="CAform" >
+                                {{ ca.content || 'empty' }}
+                              </span>
+                          </td>
+                          <td style="white-space: nowrap">
+                              <!-- form -->
+                              <form editable-form name="CAform" onbeforesave="save(CA.name, $data, $index)" ng-show="CAform.$visible" class="form-buttons form-inline" shown="insertedCAData == ca">
+                                  <button type="submit" ng-disabled="CAform.$waiting" class="btn btn-xs btn-info">
+                                    <i class="material-icons" style="font-size:14px;">save</i>
+                                  </button> 
+                                  <button type="button" ng-disabled="CAform.$waiting" ng-click="CAform.$cancel()" class="btn btn-xs btn-default">
+                                    <i class="material-icons" style="font-size:14px;">cancel</i>
+                                  </button>
+                              </form>
+                              <div class="buttons" ng-show="!CAform.$visible">
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="CAform.$show()">
+                                    <i class="material-icons" style="font-size:14px;">visibility</i>
+                                  </button>
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="delete(CA.name, $index)">
+                                    <i class="material-icons" style="font-size:14px;">delete</i>
+                                  </button>
+                              </div>
+                          </td>
+                      </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add(CA.name)">Add row</button>
+                  </uib-tab>
+
+                  <!-- Orbit Remit   -->
+                  <uib-tab>
+                    <uib-tab-heading>
+                        <i class="material-icons" style="font-size:20px;">border_top</i> {{Orbit.name}}
+                    </uib-tab-heading>
+                    <table class="table table-bordered table-hover bg-white-only">
+                      <tr style="font-weight: bold">
+                          <td style="width:40%">Content</td>
+                          <td style="width:10%" align="center">
+                              <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(Orbit.name)">
+                                <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                              </button>
+                          </td>
+                      </tr>
+                      <tr ng-repeat="orbit in OrbitData">
+                          <td class="v-middle">
+                              <!-- editable status (select-local) -->
+                              <span editable-text="orbit.content" e-name="content" e-form="Orbitform" >
+                                {{ orbit.content || 'empty' }}
+                              </span>
+                          </td>
+                          <td style="white-space: nowrap">
+                              <!-- form -->
+                              <form editable-form name="Orbitform" onbeforesave="save(Orbit.name, $data, $index)" ng-show="Orbitform.$visible" class="form-buttons form-inline" shown="insertedOrbitData == orbit">
+                                  <button type="submit" ng-disabled="Orbitform.$waiting" class="btn btn-xs btn-info">
+                                    <i class="material-icons" style="font-size:14px;">save</i>
+                                  </button> 
+                                  <button type="button" ng-disabled="Orbitform.$waiting" ng-click="Orbitform.$cancel()" class="btn btn-xs btn-default">
+                                    <i class="material-icons" style="font-size:14px;">cancel</i>
+                                  </button>
+                              </form>
+                              <div class="buttons" ng-show="!Orbitform.$visible">
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="Orbitform.$show()">
+                                    <i class="material-icons" style="font-size:14px;">visibility</i>
+                                  </button>
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="delete(Orbit.name, $index)">
+                                    <i class="material-icons" style="font-size:14px;">delete</i>
+                                  </button>
+                              </div>
+                          </td>
+                      </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add(Orbit.name)">Add row</button>
+                  </uib-tab>
+
+                  <!-- Fish Pond -->
+                  <uib-tab>
+                    <uib-tab-heading>
+                        <i class="material-icons" style="font-size:20px;">border_top</i> {{FishPond.name}}
+                    </uib-tab-heading>
+                    <table class="table table-bordered table-hover bg-white-only">
+                      <tr style="font-weight: bold">
+                          <td style="width:40%">Content</td>
+                          <td style="width:10%" align="center">
+                              <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(FishPond.name)">
+                                <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                              </button>
+                          </td>
+                      </tr>
+                      <tr ng-repeat="fish in FishPondData">
+                          <td class="v-middle">
+                              <!-- editable status (select-local) -->
+                              <span editable-text="fish.content" e-name="content" e-form="FishPondform" >
+                                {{ fish.content || 'empty' }}
+                              </span>
+                          </td>
+                          <td style="white-space: nowrap">
+                              <!-- form -->
+                              <form editable-form name="FishPondform" onbeforesave="save(FishPond.name, $data, $index)" ng-show="FishPondform.$visible" class="form-buttons form-inline" shown="insertedFishpondData == fish">
+                                  <button type="submit" ng-disabled="FishPondform.$waiting" class="btn btn-xs btn-info">
+                                    <i class="material-icons" style="font-size:14px;">save</i>
+                                  </button> 
+                                  <button type="button" ng-disabled="FishPondform.$waiting" ng-click="FishPondform.$cancel()" class="btn btn-xs btn-default">
+                                    <i class="material-icons" style="font-size:14px;">cancel</i>
+                                  </button>
+                              </form>
+                              <div class="buttons" ng-show="!FishPondform.$visible">
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="FishPondform.$show()">
+                                    <i class="material-icons" style="font-size:14px;">visibility</i>
+                                  </button>
+                                  <button type="button" class="btn btn-xs btn-info"  ng-click="delete(FishPond.name, $index)">
+                                    <i class="material-icons" style="font-size:14px;">delete</i>
+                                  </button>
+                              </div>
+                          </td>
+                      </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add(FishPond.name)">Add row</button>
+                  </uib-tab>
+
+
+              </uib-tabset>
+          </div>
+      </div>
+    </section>
+  </div>
+</div>    

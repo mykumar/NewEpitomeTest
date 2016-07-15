@@ -47,7 +47,7 @@ class TechTypesController extends Controller
             ]
         );
         if (!$validator->fails()) {
-            result = TechTypes::add($request->all());
+            $result = TechTypes::add($request->all());
             $data['data'] = array('id' => $result['id'], 'message' => 'Record Successfully Inserted');
             return $this->respondWithSuccess($data);
         }    

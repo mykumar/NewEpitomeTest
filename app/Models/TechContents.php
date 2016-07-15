@@ -19,6 +19,17 @@ class TechContents extends Model
     	return self::find($id);
     }
 
+    public static function getAllOnTechTypeId($techtypeId) {
+        return self::where('tech_types_id', '=', $techtypeId)->get();
+    }
+
+    public static function getAllOnIds($techtypeId, $sectionId, $projectId) {
+        return self::where('tech_types_id', '=', $techtypeId)
+                    ->where('section_id', '=', $sectionId)
+                    ->where('project_id', '=', $projectId)
+                    ->get();
+    }
+
     public static function add($record) {
         return self::create($record);
     }
@@ -36,7 +47,9 @@ class TechContents extends Model
         return $row->delete();
     }
 
-    public static function deleteAll() {
-        return self::truncate();
+    public static function deleteAll($techtypeId, $sectionId) {
+        return self::where('tech_types_id', '=', $techtypeId)
+                    ->where('section_id', '=', $sectionId)
+                    ->delete();
     }
 }

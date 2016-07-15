@@ -1,0 +1,314 @@
+<!-- <div class='content-wrapper' ng-init="app.settings.pagetitle = 'Technologies';">
+    <div class="col-lg-12" ng-controller="EpitomeTechtypesCtrl">
+        <ng-include src=getMainTemplateName()  replace></ng-include>
+    </div>    
+</div> -->
+
+<div class='content-wrapper' ng-init="app.settings.pagetitle = 'Technologies';">
+    <div class="col-lg-12" ng-controller="EpitomeTechtypesCtrl">
+    <uib-tabset justified="true" class="tab-container primary">
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">border_top</i> Headers
+        </uib-tab-heading>
+    
+        <!-- Headers -->
+        <section class="box ">
+            <div class="content-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover bg-white-only">
+                        <tr style="font-weight: bold">
+                            <td style="width:40%">Tag Name</td>
+                            <td style="width:50%">Value</td>
+                            <td style="width:10%" align="center">
+                                <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll('headers')">
+                                  <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="head in headersData">
+                            <td class="v-middle">
+                                <!-- editable status (select-local) -->
+                                <span editable-text="head.tag_name" e-name="tag_name" e-form="headerform" >
+                                  {{ head.tag_name || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="head.value" e-name="value" e-form="headerform" >
+                                  {{ head.value || 'empty' }}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form -->
+                                <form editable-form name="headerform" onbeforesave="save('headers', $data, $index)" ng-show="headerform.$visible" class="form-buttons form-inline" shown="insertedHeadersData == head">
+                                    <button type="submit" ng-disabled="headerform.$waiting" class="btn btn-xs btn-info">
+                                      <i class="material-icons" style="font-size:14px;">save</i>
+                                    </button> 
+                                    <button type="button" ng-disabled="headerform.$waiting" ng-click="headerform.$cancel()" class="btn btn-xs btn-default">
+                                      <i class="material-icons" style="font-size:14px;">cancel</i>
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!headerform.$visible">
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="headerform.$show()">
+                                      <i class="material-icons" style="font-size:14px;">visibility</i>
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="delete('headers', $index)">
+                                      <i class="material-icons" style="font-size:14px;">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add('headers')">Add row</button>
+                </div>
+            </div>
+        </section>
+        <br />
+    </uib-tab>
+    
+    <!-- Projects -->
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">work</i> Projects
+        </uib-tab-heading>    
+        
+        <section class="box ">
+            <div class="content-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover bg-white-only">
+                        <tr style="font-weight: bold">
+                            <td style="width:10%">Name</td>
+                            <td style="width:20%">Description</td>
+                            <td style="width:20%">Duration</td>
+                            <td style="width:20%">Clients</td>
+                            <td style="width:15%">Out Sourced To</td>
+                            <td style="width:5%">Short Name</td>
+                            <td style="width:10%" align="center">
+                                <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll('projects')">
+                                  <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="project in projectsData">
+                            <td class="v-middle">
+                                <!-- editable status (select-local) -->
+                                <span editable-text="project.name" e-name="name" e-form="projectform" >
+                                  {{ project.name || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="project.desc" e-name="desc" e-form="projectform" >
+                                  {{ project.desc || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="project.duration" e-name="duration" e-form="projectform" >
+                                  {{ project.duration || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="project.clients" e-name="clients" e-form="projectform" >
+                                  {{ project.clients || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="project.outsourced" e-name="outsourced" e-form="projectform" >
+                                  {{ project.outsourced || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="project.short_name" e-name="short_name" e-form="projectform" >
+                                  {{ project.short_name || 'empty' }}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form -->
+                                <form editable-form name="projectform" onbeforesave="save('projects', $data, $index)" ng-show="projectform.$visible" class="form-buttons form-inline" shown="insertedProjectsData == project">
+                                    <button type="submit" ng-disabled="projectform.$waiting" class="btn btn-xs btn-info">
+                                      <i class="material-icons" style="font-size:14px;">save</i>
+                                    </button> 
+                                    <button type="button" ng-disabled="projectform.$waiting" ng-click="projectform.$cancel()" class="btn btn-xs btn-default">
+                                      <i class="material-icons" style="font-size:14px;">cancel</i>
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!projectform.$visible">
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="projectform.$show()">
+                                      <i class="material-icons" style="font-size:14px;">visibility</i>
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="delete('projects', $index)">
+                                      <i class="material-icons" style="font-size:14px;">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add('projects')">Add row</button>
+                </div>
+            </div>
+        </section>
+        <br />
+    </uib-tab>
+
+    <!-- Sections -->
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">library_add</i> Sections
+        </uib-tab-heading> 
+        <section class="box ">
+            <div class="content-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover bg-white-only">
+                        <tr style="font-weight: bold">
+                            <td style="width:10%">Name</td>
+                            <td style="width:20%">Type</td>
+                            <td style="width:20%">Short Name</td>
+                            <td style="width:10%" align="center">
+                                <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll('sections')">
+                                  <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="section in sectionsData">
+                            <td class="v-middle">
+                                <!-- editable status (select-local) -->
+                                <span editable-text="section.name" e-name="name" e-form="sectionform" >
+                                  {{ section.name || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="section.type" e-name="type" e-form="sectionform" >
+                                  {{ section.type || 'empty' }}
+                                </span>
+                            </td>
+                             <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="section.short_name" e-name="short_name" e-form="sectionform" >
+                                  {{ section.short_name || 'empty' }}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form -->
+                                <form editable-form name="sectionform" onbeforesave="save('sections', $data, $index)" ng-show="sectionform.$visible" class="form-buttons form-inline" shown="insertedSectionsData == section">
+                                    <button type="submit" ng-disabled="sectionform.$waiting" class="btn btn-xs btn-info">
+                                      <i class="material-icons" style="font-size:14px;">save</i>
+                                    </button> 
+                                    <button type="button" ng-disabled="sectionform.$waiting" ng-click="sectionform.$cancel()" class="btn btn-xs btn-default">
+                                      <i class="material-icons" style="font-size:14px;">cancel</i>
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!sectionform.$visible">
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="sectionform.$show()">
+                                      <i class="material-icons" style="font-size:14px;">visibility</i>
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="delete('sections', $index)">
+                                      <i class="material-icons" style="font-size:14px;">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add('sections')">Add row</button>
+                </div>
+            </div>
+        </section>
+        <br />        
+    </uib-tab>
+    
+
+    <!-- educations -->
+    <uib-tab>
+        <uib-tab-heading>
+                    <i class="material-icons" style="font-size:20px;">developer_board</i> Educations
+        </uib-tab-heading>
+        <section class="box ">
+            <div class="content-body">
+                <div class="row">
+                    <table class="table table-bordered table-hover bg-white-only">
+                        <tr style="font-weight: bold">
+                            <td style="width:10%">Course name</td>
+                            <td style="width:20%">Uni Name</td>
+                            <td style="width:20%">Year</td>
+                            <td style="width:20%">%</td>
+                            <td style="width:10%" align="center">
+                                <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll('educations')">
+                                  <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr ng-repeat="education in educationsData">
+                            <td class="v-middle">
+                                <!-- editable status (select-local) -->
+                                <span editable-text="education.course_name" e-name="course_name" e-form="educationform" >
+                                  {{ education.course_name || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="education.uni_name" e-name="uni_name" e-form="educationform" >
+                                  {{ education.uni_name || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="education.year" e-name="year" e-form="educationform" >
+                                  {{ education.year || 'empty' }}
+                                </span>
+                            </td>
+                            <td class="v-middle">
+                                <!-- editable group (select-remote) -->
+                                <span editable-text="education.percentage_marks" e-name="percentage_marks" e-form="educationform" >
+                                  {{ education.percentage_marks || 'empty' }}
+                                </span>
+                            </td>
+                            <td style="white-space: nowrap">
+                                <!-- form -->
+                                <form editable-form name="educationform" onbeforesave="save('educations', $data, $index)" ng-show="educationform.$visible" class="form-buttons form-inline" shown="insertedEducationsData == education">
+                                    <button type="submit" ng-disabled="educationform.$waiting" class="btn btn-xs btn-info">
+                                      <i class="material-icons" style="font-size:14px;">save</i>
+                                    </button> 
+                                    <button type="button" ng-disabled="educationform.$waiting" ng-click="educationform.$cancel()" class="btn btn-xs btn-default">
+                                      <i class="material-icons" style="font-size:14px;">cancel</i>
+                                    </button>
+                                </form>
+                                <div class="buttons" ng-show="!educationform.$visible">
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="educationform.$show()">
+                                      <i class="material-icons" style="font-size:14px;">visibility</i>
+                                    </button>
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="delete('educations', $index)">
+                                      <i class="material-icons" style="font-size:14px;">delete</i>
+                                    </button>
+                                </div>
+                            </td>
+                            
+                        </tr>
+                    </table>
+                    <button class="btn btn-primary btn-sm" ng-click="add('educations')">Add row</button>
+                </div>
+            </div>
+        </section>
+        <br />                            
+    </uib-tab>    
+    </uib-tabset>
+     
+                                            
+
+    </div>
+</div>
+
+
+
+
+
+
+
+      

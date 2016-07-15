@@ -1,0 +1,85 @@
+--extra bits
+newlyAdded -- if 1, we need to save to database
+deleteDirty -- if 1, we need to Deleet from database
+
+headers : [{
+ID
+Template_types_id
+Tech_content_id
+project_id
+section_id
+Header_id
+Education_id
+Tech_types_id
+header_Tag_name
+header_value
+}]
+
+edu : [{
+ID
+Template_types_id
+Tech_content_id
+project_id
+section_id
+Header_id
+Education_id
+Tech_types_id
+edu_name
+edu_desc
+edu_Duration
+edu_Clients
+edu_Outsourced
+
+}]
+
+CA /projects : [{
+ID
+Template_types_id
+Tech_content_id
+project_id
+section_id
+Header_id
+Education_id
+Tech_types_id
+
+CA_Content (we will name as "Content")
+
+}]
+
+server side 
+---------------
+add method:
+
+if(should check first if thier is any record with values these: )
+	ID
+	Template_types_id
+	Tech_content_id
+	project_id
+	section_id
+	Header_id
+	Education_id
+	Tech_types_id
+end if so, it returns that row id
+
+else 
+
+it create new row and send the newly created id
+
+delete method:
+if(should check first if thier is any record with values these: )
+	ID
+	Template_types_id
+	Tech_content_id
+	project_id
+	section_id
+	Header_id
+	Education_id
+	Tech_types_id
+end if so, it deletes that row
+
+else it doesnot do anything
+
+
+
+
+

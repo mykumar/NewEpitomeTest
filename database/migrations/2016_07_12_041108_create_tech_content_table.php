@@ -17,7 +17,7 @@ class CreateTechContentTable extends Migration
             $table->bigInteger('tech_types_id');
             $table->string('content');
             $table->bigInteger('section_id');
-            $table->bigInteger('project_id')->nullable();
+            $table->bigInteger('project_id')->default(0);
             $table->timestamps();
         });
     }

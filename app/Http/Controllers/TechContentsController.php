@@ -32,6 +32,28 @@ class TechContentsController extends Controller
         return $this->respondWithSuccess($data);
     }
 
+    /* 
+    *  Sample Input  
+    *
+    *  Sample Output 
+    */
+    public function getAllOnTechTypeId(Request $request, $techtypeId)
+    {   
+        $data['data']  = TechContents::getAllOnTechTypeId($techtypeId);
+        return $this->respondWithSuccess($data);
+    }
+
+    /* 
+    *  Sample Input  
+    *
+    *  Sample Output 
+    */
+    public function getAllOnIds(Request $request, $techtypeId, $sectionId, $projectId)
+    {
+        $data['data']  = TechContents::getAllOnIds($techtypeId, $sectionId, $projectId);
+        return $this->respondWithSuccess($data);
+    }
+
     
     // Sample Input  
     // 	{
@@ -86,9 +108,9 @@ class TechContentsController extends Controller
         return $this->respondWithError($data);
     }   
 
-    public function deleteAll(Request $request)
+    public function deleteAll(Request $request, $techtypeId, $sectionId)
     {
-        TechContents::deleteAll();
+        TechContents::deleteAll($techtypeId, $sectionId);
         $data['data'] = array('message' => 'All Records Deleted Successfull');    
         return $this->respondWithSuccess($data);
     }   

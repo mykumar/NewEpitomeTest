@@ -1,0 +1,45 @@
+headers : [{
+ID
+Template_types_id
+Tech_content_id
+project_id
+section_id
+Header_id
+Education_id
+Tech_types_id
+header_Tag_name
+header_value
+}]
+
+edu : [{
+ID
+Template_types_id
+Tech_content_id
+project_id
+section_id
+Header_id
+Education_id
+Tech_types_id
+edu_name
+edu_desc
+edu_Duration
+edu_Clients
+edu_Outsourced
+
+}]
+
+CA /projects : [{
+ID
+Template_types_id
+Tech_content_id
+project_id
+section_id
+Header_id
+Education_id
+Tech_types_id
+
+CA_Content
+
+}]
+
+

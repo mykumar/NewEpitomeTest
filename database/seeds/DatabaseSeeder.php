@@ -95,18 +95,18 @@ class DatabaseSeeder extends Seeder
             'name' => 'MYREACTJS_RESUME',
         ]);
 
-        //projects
+        //tech_content
         DB::table('tech_content')->insert([
             'tech_types_id' => 1,
             'content' => '5 Years Of experience in the React JS and Developed many modules',
             'section_id' => 2,
-            'project_id' => null,
+            'project_id' => 0,
         ]);
         DB::table('tech_content')->insert([
             'tech_types_id' => 1,
             'content' => '5000 Years Of experience in the React JS and Developed many modules',
             'section_id' => 3,
-            'project_id' => null,
+            'project_id' => 0,
         ]);
         DB::table('tech_content')->insert([
             'tech_types_id' => 1,
