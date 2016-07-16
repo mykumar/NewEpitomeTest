@@ -27,7 +27,7 @@ app.controller('EpitomeTechtypesCtrl', ['$scope', '$filter', '$http', 'editableO
     $scope.techTypesObjectSelected = {};
     $scope.techTypesObject = {};
     $scope.techTypes = [];
-    $scope.selectedTechTypeName = "";
+    $scope.selectedTechTypeName = {name:""};
     $scope.selectedTechTypeIndex = -1;
       
     //Common Add, Save, Delete, Delete All Methods for All 
@@ -61,21 +61,43 @@ app.controller('EpitomeTechtypesCtrl', ['$scope', '$filter', '$http', 'editableO
     //TechType
     $scope.addTechType = function() {
       console.dir('addTechType');
-      $scope.sendRequest($scope.techTypeSection, 'POST', row, index, 'ADD');
+      console.dir($scope.selectedTechTypeName.name);
+      if(!$scope.isTechTypeExists($scope.selectedTechTypeName.name)) {
+        $scope.sendRequest($scope.techTypeSection, 'POST', $scope.createJsonDataForTechType($scope.selectedTechTypeName.name), null, 'ADD');
+      }  
       // $scope.sendRequest($scope.techTypeSection, 'delete', null, index, 'DELETE');
     };
     $scope.saveTechType = function() {
       console.dir('saveTechType');
-      $scope.sendRequest($scope.techTypeSection, 'PUT', row, index, 'EDIT');
+      if(!$scope.isTechTypeExists($scope.selectedTechTypeName.name)) {
+        $scope.sendRequest($scope.techTypeSection, 'PUT', $scope.createJsonDataForTechType($scope.selectedTechTypeName.name), null, 'EDIT');
+      }  
       // $scope.sendRequest($scope.techTypeSection, 'delete', null, index, 'DELETE');
     };
     $scope.deleteTechType = function() {
       console.dir('deleteTechType');
-      $scope.sendRequest($scope.techTypeSection, 'delete', null, index, 'DELETE');
+      $scope.sendRequest($scope.techTypeSection, 'delete', null, null, 'DELETE');
       // $scope.sendRequest($scope.techTypeSection, 'delete', null, index, 'DELETE');
     };
 
     //Common operations
+    $scope.getMainTemplateName = function(newValue) {
+       return "app/partials/templates/common/epitome-techtypes-common.html";
+    };  
+    
+    $scope.createJsonDataForTechType = function(newValue) {
+        var obj = {name: newValue};
+        return obj;
+    };  
+    $scope.isTechTypeExists = function(newValue) {
+      for (var index = 0; index < $scope.techTypes.length; index++) {
+        if($scope.techTypes[index].name.localeCompare(newValue) == 0)
+        {  
+          return true;  
+        }    
+      }
+      return false;
+    };  
     $scope.isEmpty = function(obj) {
       for(var prop in obj) {
           if(obj.hasOwnProperty(prop))
@@ -310,16 +332,20 @@ app.controller('EpitomeTechtypesCtrl', ['$scope', '$filter', '$http', 'editableO
               headers: {'Content-Type': 'application/json'}
         })
         .then(function(response) {
+          if(section.localeCompare($scope.techTypeSection) == 0) {
+              $scope.loadTechTypes();
+          } else {  
               // success
-            if(operation=='ADD') {
-              $scope.updateAdded(section, index, 0); 
-              $scope.updateID(section,index,parseInt(response['data']['data']['id']));
-            }  
-            if(operation=='EDIT') {
-              console.dir('-------------------------------WE GOR RESPOINSE FOR EDIT----------------------');
-              // console.dir($scope.projectsData);
-              $scope.updateDirty(section, index, 1); 
-            }
+              if(operation=='ADD') {
+                $scope.updateAdded(section, index, 0); 
+                $scope.updateID(section,index,parseInt(response['data']['data']['id']));
+              }  
+              if(operation=='EDIT') {
+                console.dir('-------------------------------WE GOR RESPOINSE FOR EDIT----------------------');
+                // console.dir($scope.projectsData);
+                $scope.updateDirty(section, index, 1); 
+              }
+          }  
         }, 
         function(response) { 
             // failed
@@ -353,21 +379,19 @@ app.controller('EpitomeTechtypesCtrl', ['$scope', '$filter', '$http', 'editableO
           return $scope.basicURL + $scope.techTypeLabelURL + '/' + $scope.techTypesObjectSelected.id + '.json';
         case 'DELETE':
           return $scope.basicURL + $scope.techTypeLabelURL + '/' + $scope.techTypesObjectSelected.id + '.json';
-        case 'DELETEALL':
-          return $scope.getDeleteAllUrl(section);
       }     
     };  
     $scope.getDeleteAllUrl = function(section) {
       var tmpBasicUrl = $scope.basicURL + $scope.techContentLabelURL + "/techtype/" + $scope.techTypesObjectSelected.id + "/";
       switch(section.toUpperCase()) {
         case 'CH':
-          return tmpBasicUrl + $scope.CH.section_id + ".json";
+          return tmpBasicUrl + $scope.CH.section_id + "/" +  "0.json";
         case 'CA':
-          return tmpBasicUrl + $scope.CA.section_id + ".json";
+          return tmpBasicUrl + $scope.CA.section_id + "/" +  "0.json";
         case 'ORBIT':
-          return tmpBasicUrl + $scope.Orbit.section_id + ".json";
+          return tmpBasicUrl + $scope.Orbit.section_id + "/" + $scope.Orbit.project_id  + ".json";
         case 'FISHPOND':
-          return tmpBasicUrl + $scope.FishPond.section_id + ".json";
+          return tmpBasicUrl + $scope.FishPond.section_id + "/" + $scope.FishPond.project_id  + ".json";
       } 
     }; 
 
@@ -395,15 +419,17 @@ app.controller('EpitomeTechtypesCtrl', ['$scope', '$filter', '$http', 'editableO
             $scope.OrbitData = $scope.initData(data['data']);
         });
         //Fishpond
-        $http.get(interUrl + $scope.Orbit.section_id + "/" + $scope.Orbit.project_id + ".json").success(function(data) {
+        $http.get(interUrl + $scope.FishPond.section_id + "/" + $scope.FishPond.project_id + ".json").success(function(data) {
             $scope.FishPondData = $scope.initData(data['data']);
+            console.dir('-----------------loadSections----------------------------');
+            console.dir($scope.FishPondData);
         });
     };
     $scope.onSelected = function (selectedItem, index) {
       console.dir('----------------onSelected------------------------------');
       console.dir($scope.generateUUID());
       $scope.techTypesObjectSelected = selectedItem;
-      $scope.selectedTechTypeName = $scope.techTypesObjectSelected.name;
+      $scope.selectedTechTypeName.name = $scope.techTypesObjectSelected.name;
       $scope.loadSections();
     }; 
     $scope.generateUUID = function() 
@@ -417,11 +443,15 @@ app.controller('EpitomeTechtypesCtrl', ['$scope', '$filter', '$http', 'editableO
           .toString(16)
           .substring(1);
     };
-
-    $scope.init = function () {
+     $scope.loadTechTypes = function () {
       $http.get($scope.techTypesURL).success(function(data) {
         $scope.techTypes = data['data'];
+        console.dir('---------------init----------------------');
+        console.dir($scope.techTypes);
       });  
+    };  
+    $scope.init = function () {
+      $scope.loadTechTypes(); 
     };  
     $scope.init();
     //SCRAP MIGHT BE USEFULL

@@ -85,10 +85,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'ReactJS',
         ]);
 
-        //template_types
-        DB::table('template_types')->insert([
-            'name' => 'My REACTJS with extra Modules ',
-        ]);
+       
 
         //epitome_types
         DB::table('epitome_types')->insert([
@@ -120,6 +117,87 @@ class DatabaseSeeder extends Seeder
             'content' => 'Section 1 and prject 2  Years Of experience in the React JS and Developed many modules',
             'section_id' => 4,
             'project_id' => 2,
+        ]);
+
+         //template_types
+        DB::table('template_types')->insert([
+            'name' => 'My REACTJS with extra Modules ',
+        ]);
+
+        //template_content
+        //template_content -- Headers
+        DB::table('template_content')->insert([
+            'template_types_id' => 1,
+            'tech_content_id' => 0,
+            'section_id' => 1,
+            'project_id' => 0,
+            'tech_types_id' => 0,
+            'education_id' => 0,
+            'header_id' => 1,
+        ]);
+        DB::table('template_content')->insert([
+            'template_types_id' => 1,
+            'tech_content_id' => 0,
+            'section_id' => 1,
+            'project_id' => 0,
+            'tech_types_id' => 0,
+            'education_id' => 0,
+            'header_id' => 2,
+        ]);
+
+        //template_content -- Education
+        DB::table('template_content')->insert([
+            'template_types_id' => 1,
+            'tech_content_id' => 0,
+            'section_id' => 5,
+            'project_id' => 0,
+            'tech_types_id' => 0,
+            'education_id' => 1,
+            'header_id' => 0,
+        ]);
+
+        //template_content -- CH
+        DB::table('template_content')->insert([
+            'template_types_id' => 1,
+            'tech_content_id' => 1,
+            'section_id' => 2,
+            'project_id' => 0,
+            'tech_types_id' => 1,
+            'education_id' => 0,
+            'header_id' => 0,
+        ]);
+
+        //template_content -- CA
+        DB::table('template_content')->insert([
+            'template_types_id' => 1,
+            'tech_content_id' => 2,
+            'section_id' => 3,
+            'project_id' => 0,
+            'tech_types_id' => 1,
+            'education_id' => 0,
+            'header_id' => 0,
+        ]);
+
+        //template_content -- Orbit
+        DB::table('template_content')->insert([
+            'template_types_id' => 1,
+            'tech_content_id' => 3,
+            'section_id' => 4,
+            'project_id' => 1,
+            'tech_types_id' => 1,
+            'education_id' => 0,
+            'header_id' => 0,
+        ]);
+
+        //template_content -- Fish
+        DB::table('template_content')->insert([
+            'template_types_id' => 1,
+            'tech_content_id' => 4,
+            'section_id' => 4,
+            'project_id' => 2,
+            'tech_types_id' => 1,
+            'education_id' => 0,
+            'header_id' => 0,
         ]);
 
     }

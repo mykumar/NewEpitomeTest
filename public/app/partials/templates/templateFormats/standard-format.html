@@ -1,0 +1,222 @@
+<section class="box ">
+            <header class="panel_header">
+                <h2 class="title pull-left">Template Manager</h2>
+                <div class="actions panel_actions pull-right">
+                    <i class="box_toggle material-icons">expand_more</i>
+                    <i class="box_setting material-icons" ng-click="section_modal()">mode_edit</i>
+                    <i class="box_close material-icons">close</i>
+                </div>
+            </header>
+            <div class="content-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <b> Select The Template </b>
+                        <ui-select ng-model="techTypesObject.selected" on-select="onSelected(techTypesObject.selected)" theme="bootstrap" ng-disabled="disabled" style="width: 200px;" title="Choose a Tech TYpe">
+                                    <ui-select-match placeholder="Select or search a Tech Type in the list..."> {{$select.selected.name}}</ui-select-match>
+                                    <ui-select-choices repeat="techTypesObject in techTypes | filter: $select.search">
+                                      <!-- <span ng-bind-html="techType.id | highlight: $select.search"></span> -->
+                                      <small ng-bind-html="techTypesObject.name | highlight: $select.search"></small>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <br />
+                                <br />
+                    </div>
+                </div>
+                <uib-tabset justified="true" class="tab-container primary">
+                    
+                    <uib-tab>
+                        <uib-tab-heading>
+                                    <!-- <i class="fa fa-{{tab.icon}}"></i> --> Template
+                        </uib-tab-heading>                
+                        <!-- start -->
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                
+                            </div>
+                            <div class="clearfix"></div>
+                            
+                            <div class="col-md-6">
+                                <br>
+                                <div class=''>
+                                    795 Folsom Ave, Suite 600
+                                    <br> San Francisco, CA 94107
+                                    <br> P: (123) 456-7890
+                                    <br> E-mail: example@mysite.com
+                                    <br> Phone: (123) 456-7890
+                                    <br> Fax: 800-692-7753
+                                    <button type="button" class="btn btn-xs btn-info"  ng-click="testme()">
+                                      <i class="material-icons" style="font-size:14px;">delete</i>
+                                    </button>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <div>
+                                <h4 class="margin-bottom-10">Billed To:</h4>
+                                <address>
+                                    <h3 class="margin-bottom-5">John Smith</h3>
+                                    <span class=''>1234 Main Street<br>Apt. 34/4B<br>
+                            Springfield<br>ST 54321</span>
+                                </address>
+                               
+                                <span class=''>Order # 12345<br>
+21st July 2015</span>
+                                <br>
+                                <div>
+                                    Invoice Date: 22nd July 2015
+                                    <br>Due Date: 22nd July 2015
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+                            <div class="col-xs-6 invoice-infoblock pull-left">
+                            </div>
+                            
+                            <div class="clearfix"></div>
+                           </div>
+                        </div>
+
+                         <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="table-responsive">
+                                    <!-- Carrer Highlights -->
+                                    <table class="table">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th style="width:97%"><h4>Carrer Highlights</h4></th> 
+                                                <th style="width:3%">
+                                                    <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(CH.name)">
+                                                        <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                                    </button>  
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>500000 Years of Experience in the Field of the React JS Java Script</td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-xs btn-info"  ng-click="delete(CH.name, $index)">
+                                                        <i class="material-icons" style="font-size:14px;">delete</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                     <!-- Education -->
+                                     <table class="table">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th style="width:97%"><h4>Education</h4></th> 
+                                                <th style="width:3%">
+                                                    <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(CH.name)">
+                                                        <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                                    </button>  
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>500000 Years of Experience in the Field of the React JS Java Script</td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-xs btn-info"  ng-click="delete(CH.name, $index)">
+                                                        <i class="material-icons" style="font-size:14px;">delete</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- Carrer Achivements -->
+                                     <table class="table">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th style="width:97%"><h4>Carrer Achivements</h4></th> 
+                                                <th style="width:3%">
+                                                    <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(CH.name)">
+                                                        <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                                    </button>  
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>500000 Years of Experience in the Field of the React JS Java Script</td>
+                                                <td class="text-center">
+                                                    <button type="button" class="btn btn-xs btn-info"  ng-click="delete(CH.name, $index)">
+                                                        <i class="material-icons" style="font-size:14px;">delete</i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <!-- Prjects -->
+                                    <h3>Professional Experience</h3>
+                                    <!-- Orbit -->
+                                    <table class="table">
+                                      <thead class="thead-inverse">
+                                        <tr>
+                                          <th>Orbit Remit Pvt. Ltd. </th>
+                                          <th></th>
+                                          <th>Oct. 2014 - Present</th>
+                                          <th class="text-right">
+                                            <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(CH.name)">
+                                                <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                            </button>  
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                            <td>500000 Years of Experience in the Field of the React JS Java Script</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-right">
+                                                <button type="button" class="btn btn-xs btn-info"  ng-click="delete(CH.name, $index)">
+                                                    <i class="material-icons" style="font-size:14px;">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    </table>  
+                                    <!-- Fish -->
+                                    <table class="table">
+                                      <thead class="thead-inverse">
+                                        <tr>
+                                          <th>FishPond Pvt. Ltd. </th>
+                                          <th></th>
+                                          <th>Oct. 2014 - Present</th>
+                                          <th class="text-right">
+                                            <button type="button" class="btn btn-xs btn-info"  ng-click="deleteAll(CH.name)">
+                                                <i class="material-icons" style="font-size:20px;">delete_forever</i>
+                                            </button>  
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                            <td>500000 Years of Experience in the Field of the React JS Java Script</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="text-right">
+                                                <button type="button" class="btn btn-xs btn-info"  ng-click="delete(CH.name, $index)">
+                                                    <i class="material-icons" style="font-size:14px;">delete</i>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    </table> 
+                                </div>
+                            </div>
+                        </div>                                
+                    </uib-tab>
+                    <uib-tab>
+                        <uib-tab-heading>
+                                    <!-- <i class="fa fa-{{tab.icon}}"></i> --> Preview
+                        </uib-tab-heading>     
+                    </uib-tab>    
+                </uib-tabset>            
+        </div>
+</section>

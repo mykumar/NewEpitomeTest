@@ -47,8 +47,8 @@ class TemplateTypesController extends Controller
             ]
         );
         if (!$validator->fails()) {
-            TemplateTypes::add($request->all());
-            $data['data'] = array('message' => 'Record Successfully Inserted');
+            $result = TemplateTypes::add($request->all());
+            $data['data'] = array('id' => $result['id'], 'message' => 'Record Successfully Inserted');
             return $this->respondWithSuccess($data);
         }    
         $data['data'] = array('message' => $validator->messages());

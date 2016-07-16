@@ -47,9 +47,10 @@ class TechContents extends Model
         return $row->delete();
     }
 
-    public static function deleteAll($techtypeId, $sectionId) {
+    public static function deleteAll($techtypeId, $sectionId, $projectId) {
         return self::where('tech_types_id', '=', $techtypeId)
                     ->where('section_id', '=', $sectionId)
+                    ->where('project_id', '=', $projectId)
                     ->delete();
     }
 }

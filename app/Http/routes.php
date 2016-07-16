@@ -96,6 +96,11 @@ Route::get('techcontents/techtype/{techtypeId}/{sectionId}/{projectId}.json', 'T
 Route::post('techcontents.json', 'TechContentsController@add');
 Route::put('techcontents/{id}.json', 'TechContentsController@edit');
 Route::delete('techcontents/{id}.json', 'TechContentsController@delete');
-Route::delete('techcontents/techtype/{techtypeId}/{sectionId}.json', 'TechContentsController@deleteAll');
+Route::delete('techcontents/techtype/{techtypeId}/{sectionId}/{projectId}.json', 'TechContentsController@deleteAll');
 
-
+// http://epitome.dev/techcontents/techtype/1/4.json
+//TemplateContent 
+Route::get('templatecontents/getTemplateContentByTemplateTypeId/{id}.json', 'TemplateContentsController@getTemplateContentByTemplateTypeId');
+Route::post('templatecontents.json', 'TemplateContentsController@add');
+Route::delete('templatecontents/{id}.json', 'TemplateContentsController@delete');
+Route::delete('templatecontents/delAllWithTemplateTypeId/{id}.json', 'TemplateContentsController@delAllWithTemplateTypeId');

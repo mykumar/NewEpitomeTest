@@ -1,41 +1,130 @@
-Tomorrow works
------------------------
-tech types: add/edit/delete the tech types
-Thier is some problem in the Orbit and FishPond tabs check it
 
 --extra bits
 newlyAdded -- if 1, we need to save to database
 deleteDirty -- if 1, we need to Deleet from database
 
-headers : [{
-ID
-Template_types_id
-Tech_content_id
-project_id
-section_id
-Header_id
-Education_id
-Tech_types_id
-header_Tag_name
-header_value
-}]
+if(Header_id > 0)
+{
+	headers : [{
+			ID
+			Template_types_id
+			Tech_content_id
+			Tech_types_id
+			section_id
+			Header_id
+			Education_id
+			project_id
+			header_Tag_name
+			header_value
+	}]
+}
 
-edu : [{
-ID
-Template_types_id
-Tech_content_id
-project_id
-section_id
-Header_id
-Education_id
-Tech_types_id
-edu_name
-edu_desc
-edu_Duration
-edu_Clients
-edu_Outsourced
+if(Education_id > 0)
+{
+	edu : [{
+			ID
+			Template_types_id
+			Tech_content_id
+			Tech_types_id
+			section_id
+			Header_id
+			Education_id
+			project_id
+			edu_name
+			edu_desc
+			edu_Duration
+			edu_Clients
+			edu_Outsourced
+	}]
+}
 
-}]
+if(Projects_id > 0)
+{
+	headers : [{
+			ID
+			Template_types_id
+			Tech_content_id
+			Tech_types_id
+			section_id
+			Header_id
+			Education_id
+			project_id
+			ID
+			name
+			desc
+			Duration
+			Clients
+			Outsourced
+	}]
+}
+
+
+//sections 
+//CH
+if(Tech_types_id > 0 && Tech_content_id > 0 && section_id == 2 && project_id == 0 )
+{
+	edu : [{
+			ID
+			Template_types_id
+			Tech_content_id
+			Tech_types_id
+			section_id
+			Header_id
+			Education_id
+			project_id
+			Content
+	}]
+}
+
+//CA
+if(Tech_types_id > 0 && Tech_content_id > 0 && section_id == 3 && project_id == 0 )
+{
+	edu : [{
+			ID
+			Template_types_id
+			Tech_content_id
+			Tech_types_id
+			section_id
+			Header_id
+			Education_id
+			project_id
+			Content
+	}]
+}
+
+//Projects
+//Orbit
+if(Tech_types_id > 0 && Tech_content_id > 0 && section_id == 4 && project_id == 1 )
+{
+	edu : [{
+			ID
+			Template_types_id
+			Tech_content_id
+			Tech_types_id
+			section_id
+			Header_id
+			Education_id
+			project_id
+			Content
+	}]
+}
+
+//Fish
+if(Tech_types_id > 0 && Tech_content_id > 0 && section_id == 4 && project_id == 2 )
+{
+	edu : [{
+			ID
+			Template_types_id
+			Tech_content_id
+			Tech_types_id
+			section_id
+			Header_id
+			Education_id
+			project_id
+			Content
+	}]
+}
+
 
 CA /projects : [{
 ID
@@ -53,10 +142,6 @@ CA_Content (we will name as "Content")
 
 server side 
 ---------------
-get method (headers, projects (Orbit, Fishpond), educatons, CA, CH):
-get all and make strure simliar to above on server side and send
-
-
 add method:
 
 if(should check first if thier is any record with values these: )

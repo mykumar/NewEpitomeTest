@@ -108,9 +108,9 @@ class TechContentsController extends Controller
         return $this->respondWithError($data);
     }   
 
-    public function deleteAll(Request $request, $techtypeId, $sectionId)
+    public function deleteAll(Request $request, $techtypeId, $sectionId, $projectId)
     {
-        TechContents::deleteAll($techtypeId, $sectionId);
+        TechContents::deleteAll($techtypeId, $sectionId, $projectId);
         $data['data'] = array('message' => 'All Records Deleted Successfull');    
         return $this->respondWithSuccess($data);
     }   

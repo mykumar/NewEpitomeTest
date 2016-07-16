@@ -71,7 +71,7 @@ angular.module('app')
                     })
                     .state('app.template.manager', {
                         url: '/manager',
-                        templateUrl: 'app/partials/template-manager.html',
+                        templateUrl: 'app/partials/templates/template-manager.html',
                         controller: 'TemplateManagerCtrl',
                         resolve: {
                             deps: ['$ocLazyLoad',
